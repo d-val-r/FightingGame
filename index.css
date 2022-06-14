@@ -2,19 +2,33 @@
     position: absolute; 
     display: flex; 
     width: 1024px; 
-    height: 576px;
+    padding: 20px;
+    align-items: center;
+}
+
+
+#health1-container {
+    position: relative;
+    height: 30px; 
+    width: 100%;
+    background-color: blue;
 }
 
 #health1 {
     background-color: yellow;
     height: 30px; 
+}
+
+#health2-container {
+    position: relative;
+    height: 30px; 
     width: 100%;
+    background-color: blue;
 }
 
 #health2 {
     background-color: yellow; 
     height: 30px; 
-    width: 100%;
 }
 
 #timer {
@@ -29,4 +43,8 @@ canvas {
     width: 80%; 
     width: 1024px; 
     height: 576px;
+}
+
+* {
+    box-sizing: border-box;
 }

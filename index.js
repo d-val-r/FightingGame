@@ -217,6 +217,7 @@ const animate = () => {
         && player1.isAttacking) {
             console.log("Player1 attacks!");
             player1.isAttacking = false;
+            document.querySelector("#health2").style.width = '20%';
         }
 
     if (player2.attackBox.position.x <= player1.position.x + player1.width
@@ -226,6 +227,7 @@ const animate = () => {
         && player2.isAttacking) {
             console.log("Player2 attacks!");
             player2.isAttacking = false;
+            document.querySelector("#health1").style.width = '20%';
         }
 
 }
