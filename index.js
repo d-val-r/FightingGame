@@ -17,7 +17,8 @@ class Sprite {
             width: 100,
             height: width
         },
-        this.isAttacking = false
+        this.isAttacking = false,
+        this.health = 100
     }
 
     attack() {
@@ -209,7 +210,7 @@ const animate = () => {
     } 
 
 
-    // attacking controls
+    // attacking controls for player 1
     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x 
         && player1.attackBox.position.x <= player2.position.x + player2.width
         && player1.attackBox.position.y >= player2.position.y
@@ -217,9 +218,11 @@ const animate = () => {
         && player1.isAttacking) {
             console.log("Player1 attacks!");
             player1.isAttacking = false;
-            document.querySelector("#health2").style.width = '20%';
+            player2.health -= 10;
+            document.querySelector("#health2").style.width = `${player2.health}%`;
         }
 
+    // attack controls for player 2
     if (player2.attackBox.position.x <= player1.position.x + player1.width
         && player2.attackBox.position.x >= player1.position.x
         && player2.attackBox.position.y >= player1.position.y
@@ -227,7 +230,8 @@ const animate = () => {
         && player2.isAttacking) {
             console.log("Player2 attacks!");
             player2.isAttacking = false;
-            document.querySelector("#health1").style.width = '20%';
+            player1.health -= 10;
+            document.querySelector("#health1").style.width = `${player1.health}%`;
         }
 
 }
