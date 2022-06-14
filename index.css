@@ -1,11 +1,32 @@
-#health1 {
-    flex-grow: 4;
+#ui-container {
+    position: absolute; 
+    display: flex; 
+    width: 1024px; 
+    height: 576px;
 }
 
-#timer {
-    flex-grow: 2;
+#health1 {
+    background-color: yellow;
+    height: 30px; 
+    width: 100%;
 }
 
 #health2 {
-    flex-grow: 4;
+    background-color: yellow; 
+    height: 30px; 
+    width: 100%;
+}
+
+#timer {
+    background-color: red; 
+    width: 100px;
+    height: 100px;
+    flex-shrink: 0;
+}
+
+canvas {
+    border: 1px solid black; 
+    width: 80%; 
+    width: 1024px; 
+    height: 576px;
 }
