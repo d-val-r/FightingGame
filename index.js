@@ -16,7 +16,15 @@ class Sprite {
             },
             width: 100,
             height: width
-        }
+        },
+        this.isAttacking = false
+    }
+
+    attack() {
+        this.isAttacking = true
+        setTimeout(() => {
+            this.isAttacking = false;
+        }, 100);
     }
 
     draw() {
@@ -199,6 +207,26 @@ const animate = () => {
         player2.velocity.y = -5;
     } 
 
+
+    // attacking controls
+    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x 
+        && player1.attackBox.position.x <= player2.position.x + player2.width
+        && player1.attackBox.position.y >= player2.position.y
+        && player1.attackBox.position.y <= player2.position.y + player2.height
+        && player1.isAttacking) {
+            console.log("Player1 attacks!");
+            player1.isAttacking = false;
+        }
+
+    if (player2.attackBox.position.x <= player1.position.x + player1.width
+        && player2.attackBox.position.x >= player1.position.x
+        && player2.attackBox.position.y >= player1.position.y
+        && player2.attackBox.position.y <= player1.position.y + player1.height
+        && player2.isAttacking) {
+            console.log("Player2 attacks!");
+            player2.isAttacking = false;
+        }
+
 }
 
 // movement while key is held
@@ -237,6 +265,12 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowUp':
             keys.upArrow.pressed = true;
             player2.falling = true;
+            break;
+        case 'f':
+            player1.attack();
+            break;
+        case ' ':
+            player2.attack();
             break;
     }
 });
