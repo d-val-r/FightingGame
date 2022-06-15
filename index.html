@@ -5,18 +5,25 @@
         <link rel="stylesheet" href="index.css">
     </head>
     <body>
-        <div style="position: relative">
+        <div id="canvas-container" style="position: relative">
             <div id="ui-container">
                 <!-- Player 1 health -->
                 <div id="health1-container">
                     <div id="health1"></div>
                 </div>
                 <!-- Timer -->
-                <div id="timer"></div>
+                <div id="timer-container">
+                    <h1 id="timer">
+                        10
+                    </h1>
+                </div>
                 <!-- Player 2 health -->
                 <div id="health2-container">
                     <div id="health2"></div>
                 </div>
+            </div>
+            <div id="winner-message">
+                Tie
             </div>
             <canvas>
             </canvas>

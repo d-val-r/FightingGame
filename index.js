@@ -82,6 +82,17 @@ class Sprite {
 // used to replicate effect of gravity on an object
 const GRAVITY = 0.4;
 
+// timer controls
+let timerValue = 60;
+const timer = document.querySelector("#timer");
+timer.textContent = timerValue
+let timerId;
+
+// game over screen
+const winnerMessage = document.querySelector("#winner-message");
+console.log(winnerMessage);
+winnerMessage.textContent = "";
+
 
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
@@ -232,7 +243,11 @@ const animate = () => {
             player2.isAttacking = false;
             player1.health -= 10;
             document.querySelector("#health1").style.width = `${player1.health}%`;
-        }
+    }
+
+    // end game based on player health
+    if (player1.health === 0 || player2.health === 0) determineWinner(player1, player2, timerId);
+
 
 }
 
@@ -320,4 +335,47 @@ window.addEventListener('keyup', (event) => {
     }
 });
 
+const determineWinner = (p1, p2, timerId) => {
+    if (p1.health > p2.health) {
+        winnerMessage.textContent = "Player 1 Wins!";
+    } else if (p1.health < p2.health){
+        winnerMessage.textContent = "Player 2 Wins!"
+    } else {
+        winnerMessage.textContent = "Tie Game!";
+    }
+
+    // stop the timer
+    clearTimeout(timerId);
+}
+
+
+const decreaseTime = () => {
+    if (timerValue > 0) {
+        timerValue--;
+        timerId = setTimeout(decreaseTime, 1000)
+        timer.textContent = timerValue;
+    } else { // time is up
+        determineWinner(player1, player2);
+    }
+}
+
+const gameLoop = () => {
+    let loop = true;
+
+    while (loop) {
+        if (player1.health <= 0 || player2.health <= 0) {
+            loop = false;
+            if (player1.health > player2.health) {
+                winnerMessage.textContent = "Player 1 Wins!";
+            } else if (player2.health > player1.health) {
+                winnerMessage.textContent = "Player 2 Wins!"
+            } else {
+                winnerMessage.textContent = "Tie Game!";
+            }
+        }
+    }
+}
+
 animate();
+decreaseTime();
+// gameLoop();
