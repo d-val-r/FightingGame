@@ -1,14 +1,3 @@
-const background = new Sprite(
-    1024,
-    576,
-    {
-        x: 0,
-        y: 0
-    },
-    "./assets/background/PNG/cyberpunk-street.png"
-)
-
-
 // used to replicate effect of gravity on an object
 const GRAVITY = 0.4;
 
@@ -17,6 +6,9 @@ let timerValue = 60;
 const timer = document.querySelector("#timer");
 timer.textContent = timerValue
 let timerId;
+
+// animation controls
+let frame = 0;
 
 // game over screen
 const winnerMessage = document.querySelector("#winner-message");
@@ -59,6 +51,32 @@ canvas.height = 576;
 // render a rectangle at (0,0), filling the whole canvas
 ctx.fillRect(0,0, canvas.width, canvas.height);
 
+const background = new Sprite(
+    1024,
+    576,
+    {
+        x: 0,
+        y: 0
+    },
+    "./assets/background/PNG/cyberpunk-street.png"
+)
+
+
+
+
+
+const cyborg = new Sprite(
+    250,
+    170,
+    {
+        x: 0,
+        y: canvas.height - 150
+    },
+    "./assets/characters/cyborg/Cyborg_idle.png",
+    2.5,
+    4
+)
+
 const player1 = new Fighter(
     50, 
     150, 
@@ -94,6 +112,7 @@ const animate = () => {
     // ctx.fillStyle = 'black';
     // ctx.fillRect(0,0, canvas.width, canvas.height);
     background.update();
+    cyborg.update(frame++ % cyborg.frames);
     player1.update();
     player2.update();
 
