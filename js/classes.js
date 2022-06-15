@@ -1,12 +1,15 @@
 // represents the background for the game
 class Sprite {
-    constructor(width, height, position) {
+    constructor(width, height, position, imgSrc) {
         this.position = position;
         this.height = height;
         this.width = width;
+        this.image = new Image();
+        this.image.src = imgSrc;
     }
 
     draw() {
+        ctx.drawImage(this.image, this.position.x, this.position.y);
     }
 
     update() {

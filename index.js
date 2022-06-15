@@ -1,3 +1,14 @@
+const background = new Sprite(
+    1024,
+    576,
+    {
+        x: 0,
+        y: 0
+    },
+    "./assets/background/PNG/cyberpunk-street.png"
+)
+
+
 // used to replicate effect of gravity on an object
 const GRAVITY = 0.4;
 
@@ -80,8 +91,9 @@ player2.draw();
 const animate = () => {
     window.requestAnimationFrame(animate);
     ctx.clearRect(0,0, canvas.width, canvas.height);
-    ctx.fillStyle = 'black';
-    ctx.fillRect(0,0, canvas.width, canvas.height);
+    // ctx.fillStyle = 'black';
+    // ctx.fillRect(0,0, canvas.width, canvas.height);
+    background.update();
     player1.update();
     player2.update();
 
