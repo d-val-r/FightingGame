@@ -16,6 +16,11 @@ console.log(winnerMessage);
 winnerMessage.textContent = "";
 
 
+// ensures that after a player wins,
+// the other player cannot win by attaking after the game stops
+let gameOver = false;
+
+
 const canvas = document.querySelector("canvas");
 const ctx = canvas.getContext('2d');
 const keys = {
@@ -287,6 +292,9 @@ window.addEventListener('keyup', (event) => {
 });
 
 const determineWinner = (p1, p2, timerId) => {
+    // stop the function if the game is over
+    if (gameOver) return;
+
     if (p1.health > p2.health) {
         winnerMessage.textContent = "Player 1 Wins!";
     } else if (p1.health < p2.health){
@@ -294,6 +302,9 @@ const determineWinner = (p1, p2, timerId) => {
     } else {
         winnerMessage.textContent = "Tie Game!";
     }
+
+    // 
+    gameOver = true;
 
     // stop the timer
     clearTimeout(timerId);
