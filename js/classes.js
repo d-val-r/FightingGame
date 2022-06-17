@@ -1,34 +1,38 @@
 // represents any rendered sprite
 class Sprite {
-    constructor(width, height, position, imgSrc, scale = 1, frames = 1) {
+    constructor(width, height, position, imgSrc, scale = 1, totalFrames = 1, currentFrame = -1) {
         this.position = position;
         this.height = height;
         this.width = width;
         this.image = new Image();
         this.image.src = imgSrc;
-        this.scale = scale
-        this.frames = frames
+        this.scale = scale;
+        this.totalFrames = totalFrames;
+        this.framesElapsed = 0;
+        this.currentFrame = currentFrame;
     }
 
-    // for sprites that need to be animated (player animations)
-    // use a frame count to loop through the animation frames
-    // for still images, the currentFrame is set to 0 so that
-    // the crop (second argument to drawImage) remains 0 (no crop)
-    draw(currentFrame = 0) {
+    draw() {
         ctx.drawImage(
             this.image, 
-            currentFrame * (this.image.width / this.frames),
+            (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames),
             0,
-            this.image.width / this.frames,
+            this.image.width / this.totalFrames,
             this.image.height,
             this.position.x, 
             this.position.y, 
-            this.image.width / this.frames * this.scale, 
+            this.image.width / this.totalFrames * this.scale, 
             this.image.height * this.scale);
     }
 
-    update(currentFrame = 0) {
-        this.draw(currentFrame);
+    update() {
+        this.framesElapsed++;
+        if (this.framesElapsed % 17 === 0) {
+            this.currentFrame = (this.currentFrame === -1 ? -1 : (this.currentFrame  + 1) % this.totalFrames);
+        }
+
+        this.draw();
+
     }
 }
 

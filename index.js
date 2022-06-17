@@ -70,11 +70,12 @@ const cyborg = new Sprite(
     170,
     {
         x: 0,
-        y: canvas.height - 150
+        y: canvas.height - 230
     },
     "./assets/characters/cyborg/Cyborg_idle.png",
-    2.5,
-    4
+    4.0,
+    4,
+    0
 )
 
 const player1 = new Fighter(
@@ -112,7 +113,7 @@ const animate = () => {
     // ctx.fillStyle = 'black';
     // ctx.fillRect(0,0, canvas.width, canvas.height);
     background.update();
-    cyborg.update(frame++ % cyborg.frames);
+    cyborg.update();
     player1.update();
     player2.update();
 
