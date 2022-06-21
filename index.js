@@ -70,29 +70,48 @@ const background = new Sprite(
 
 
 
-const cyborg = new Sprite(
-    250,
-    170,
-    {
-        x: 0,
-        y: canvas.height - 230
-    },
+// const player1 = new Player(
+//     50,
+//     170,
+//     {
+//         x: 0,
+//         y: canvas.height - 250
+//     },
+//     {
+//         x:0,
+//         y:0
+//     },
+//     "right",
+//     "./assets/characters/cyborg/Cyborg_idle.png",
+//     4.0,
+//     4,
+//     0
+// );
+
+
+const player1 = new Player(
+    50, 
+    150, 
+    
+    {x:0, y:canvas.height - 200}, 
+    {x: 0, y:0},
+    "right",
     "./assets/characters/cyborg/Cyborg_idle.png",
     4.0,
     4,
     0
-)
+);
 
-const player1 = new Fighter(
-    50, 
-    150, 
-    {
-        position: 
-            {x:0, y:canvas.height - 150}, 
-        velocity: 
-            {x: 0, y:0}
-    },
-    "right");
+// const player1 = new Fighter(
+//     50, 
+//     150, 
+//     {
+//         position: 
+//             {x:0, y:canvas.height - 150}, 
+//         velocity: 
+//             {x: 0, y:0}
+//     },
+//     "right");
 
 player1.draw();
 
@@ -118,9 +137,11 @@ const animate = () => {
     // ctx.fillStyle = 'black';
     // ctx.fillRect(0,0, canvas.width, canvas.height);
     background.update();
-    cyborg.update();
+    // cyborg.update();
     player1.update();
     player2.update();
+
+
 
     
     // player animation controls
