@@ -139,6 +139,7 @@ class Player extends Sprite {
         },
         this.isAttacking = false;
         this.health = 100;
+        this.rectangle = false;
     }
 
     attack() {
@@ -146,6 +147,23 @@ class Player extends Sprite {
         setTimeout(() => {
             this.isAttacking = false;
         }, 100);
+    }
+
+
+    draw() {
+        if (this.rectangle) {
+
+            // draw the sprite
+            ctx.fillStyle = 'red';
+            ctx.fillRect(this.position.x, this.position.y, this.image.width / this.totalFrames * this.scale / 2, this.image.height * this.scale);
+
+            // draw the attackbox
+            if (this.isAttacking) {
+                ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
+        }
+        } 
+        super.draw();
+        
     }
 
     update() {
@@ -159,11 +177,11 @@ class Player extends Sprite {
         // update the position of the attackbox
         // reverse the direction of the attack box based on the direction the
         // sprite is facing
-        this.attackBox.position.x = this.position.x - (this.direction === "left" ? this.width : 0);
-        this.attackBox.position.y = this.position.y;
+        this.attackBox.position.x = this.position.x + this.image.width / this.totalFrames - (this.direction === "left" ? this.width : 0);
+        this.attackBox.position.y = this.position.y + this.image.height;
         
         // bounds on the x-axis
-        if (this.position.x + this.width >= canvas.width || this.position.x <= 0) {
+        if (this.position.x + this.width * this.scale >= canvas.width || this.position.x <= 0) {
             this.velocity.x = 0;
         }
 

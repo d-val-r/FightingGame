@@ -102,6 +102,8 @@ const player1 = new Player(
     0
 );
 
+player1.rectangle = true;
+
 // const player1 = new Fighter(
 //     50, 
 //     150, 
@@ -201,7 +203,7 @@ const animate = () => {
     // attacking controls for player 1
     if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x 
         && player1.attackBox.position.x <= player2.position.x + player2.width
-        && player1.attackBox.position.y >= player2.position.y
+        && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y 
         && player1.attackBox.position.y <= player2.position.y + player2.height
         && player1.isAttacking) {
             console.log("Player1 attacks!");
