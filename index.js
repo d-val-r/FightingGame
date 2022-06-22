@@ -215,7 +215,7 @@ const animate = () => {
     // attack controls for player 2
     if (player2.attackBox.position.x <= player1.position.x + player1.width
         && player2.attackBox.position.x >= player1.position.x
-        && player2.attackBox.position.y >= player1.position.y
+        && player2.attackBox.position.y + player2.attackBox.height >= player1.position.y
         && player2.attackBox.position.y <= player1.position.y + player1.height
         && player2.isAttacking) {
             console.log("Player2 attacks!");
