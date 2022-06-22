@@ -155,7 +155,11 @@ class Player extends Sprite {
 
             // draw the sprite
             ctx.fillStyle = 'red';
-            ctx.fillRect(this.position.x, this.position.y, this.image.width / this.totalFrames * this.scale / 2, this.image.height * this.scale);
+            ctx.fillRect(
+                this.position.x, 
+                this.position.y, 
+                this.image.width / this.totalFrames * this.scale / 2, 
+                this.image.height * this.scale);
 
             // draw the attackbox
             if (this.isAttacking) {

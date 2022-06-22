@@ -92,7 +92,6 @@ const background = new Sprite(
 const player1 = new Player(
     50, 
     150, 
-    
     {x:0, y:canvas.height - 200}, 
     {x: 0, y:0},
     "right",
@@ -117,16 +116,32 @@ player1.rectangle = true;
 
 player1.draw();
 
-const player2 = new Fighter(
+// const player2 = new Fighter(
+//     50, 
+//     150, 
+//     {
+//         position: 
+//             {x:canvas.width - 50, y:canvas.height - 150}, 
+//         velocity: 
+//             {x:0, y:0}
+//     }, 
+//     "left");
+
+
+
+const player2 = new Player(
     50, 
     150, 
-    {
-        position: 
-            {x:canvas.width - 50, y:canvas.height - 150}, 
-        velocity: 
-            {x:0, y:0}
-    }, 
-    "left");
+    {x:canvas.width - 50, y:canvas.height - 200},
+    {x: 0, y:0},
+    "left",
+    "./assets/characters/biker/Biker_idle_inverted.png",
+    4.0,
+    4,
+    0
+);
+
+player2.rectangle = true;
 
 player2.draw();
 
