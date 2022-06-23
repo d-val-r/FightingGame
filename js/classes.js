@@ -191,7 +191,7 @@ class Player extends Sprite {
         // update the position of the attackbox
         // reverse the direction of the attack box based on the direction the
         // sprite is facing
-        this.attackBox.position.x = this.position.x + this.image.width / this.totalFrames - (this.direction === "left" ? this.width : 0);
+        this.attackBox.position.x = this.position.x + this.image.width / this.totalFrames;
         this.attackBox.position.y = this.position.y + this.image.height;
 
 
