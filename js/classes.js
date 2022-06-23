@@ -153,16 +153,17 @@ class Player extends Sprite {
     draw() {
         if (this.rectangle) {
 
-            // draw the sprite
+            // draw the sprite background for testing purposes
             ctx.fillStyle = 'red';
             ctx.fillRect(
-                this.position.x, 
+                this.position.x + (this.direction === "left" ? this.image.width / (this.totalFrames - 2) : 0),
                 this.position.y, 
                 this.image.width / this.totalFrames * this.scale / 2, 
                 this.image.height * this.scale);
 
             // draw the attackbox
             if (this.isAttacking) {
+                ctx.fillStyle = 'black';
                 ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
         }
         } 
