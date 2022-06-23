@@ -132,7 +132,7 @@ player1.draw();
 const player2 = new Player(
     50, 
     150, 
-    {x:canvas.width - 50, y:canvas.height - 200},
+    {x:canvas.width - 250, y:canvas.height - 200},
     {x: 0, y:0},
     "left",
     "./assets/characters/biker/Biker_idle_inverted.png",

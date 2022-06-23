@@ -140,6 +140,14 @@ class Player extends Sprite {
         this.isAttacking = false;
         this.health = 100;
         this.rectangle = false;
+        this.hitbox = {
+            position: {
+                x: this.position.x + (this.direction === "left" ? this.image.width / (this.totalFrames - 2) : 0),
+                y: this.position.y
+            },
+            width: this.image.width / this.totalFrames * this.scale / 2, 
+            height: this.image.height * this.scale
+        }
     }
 
     attack() {
@@ -156,10 +164,11 @@ class Player extends Sprite {
             // draw the sprite background for testing purposes
             ctx.fillStyle = 'red';
             ctx.fillRect(
-                this.position.x + (this.direction === "left" ? this.image.width / (this.totalFrames - 2) : 0),
-                this.position.y, 
-                this.image.width / this.totalFrames * this.scale / 2, 
-                this.image.height * this.scale);
+                this.hitbox.position.x,
+                this.hitbox.position.y,
+                this.hitbox.width,
+                this.hitbox.height
+                );
 
             // draw the attackbox
             if (this.isAttacking) {
@@ -184,6 +193,10 @@ class Player extends Sprite {
         // sprite is facing
         this.attackBox.position.x = this.position.x + this.image.width / this.totalFrames - (this.direction === "left" ? this.width : 0);
         this.attackBox.position.y = this.position.y + this.image.height;
+
+
+        this.hitbox.position.x = this.position.x + (this.direction === "left" ? this.image.width / (this.totalFrames - 2) : 0),
+        this.hitbox.position.y = this.position.y;
         
         // bounds on the x-axis
         if (this.position.x + this.width * this.scale >= canvas.width || this.position.x <= 0) {
