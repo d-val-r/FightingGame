@@ -216,10 +216,10 @@ const animate = () => {
 
 
     // attacking controls for player 1
-    if (player1.attackBox.position.x + player1.attackBox.width >= player2.position.x 
-        && player1.attackBox.position.x <= player2.position.x + player2.width
-        && player1.attackBox.position.y + player1.attackBox.height >= player2.position.y 
-        && player1.attackBox.position.y <= player2.position.y + player2.height
+    if (player1.attackBox.position.x + player1.attackBox.width >= player2.hitbox.position.x 
+        && player1.attackBox.position.x <= player2.hitbox.position.x + player2.hitbox.width
+        && player1.attackBox.position.y + player1.attackBox.height >= player2.hitbox.position.y 
+        && player1.attackBox.position.y <= player2.hitbox.position.y + player2.hitbox.height
         && player1.isAttacking) {
             console.log("Player1 attacks!");
             player1.isAttacking = false;
@@ -228,10 +228,10 @@ const animate = () => {
         }
 
     // attack controls for player 2
-    if (player2.attackBox.position.x <= player1.position.x + player1.width
-        && player2.attackBox.position.x >= player1.position.x
-        && player2.attackBox.position.y + player2.attackBox.height >= player1.position.y
-        && player2.attackBox.position.y <= player1.position.y + player1.height
+    if (player2.attackBox.position.x <= player1.hitbox.position.x + player1.hitbox.width
+        && player2.attackBox.position.x >= player1.hitbox.position.x
+        && player2.attackBox.position.y + player2.attackBox.height >= player1.hitbox.position.y
+        && player2.attackBox.position.y <= player1.hitbox.position.y + player1.hitbox.height
         && player2.isAttacking) {
             console.log("Player2 attacks!");
             player2.isAttacking = false;
