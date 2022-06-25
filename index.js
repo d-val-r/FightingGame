@@ -100,9 +100,22 @@ const player1 = new Player(
     4,
     0,
     {
-        "idle": "./assets/characters/cyborg/Cyborg_idle.png",
-        "run_right": "./assets/characters/cyborg/Cyborg_run.png",
-        "run_left": "./assets/characters/cyborg/Cyborg_run_inverted.png"
+        "idle_right": {
+            img: new Image(),
+            src: "./assets/characters/cyborg/Cyborg_idle.png"
+        },
+        "idle_left": {
+            img: new Image(),
+            src: "./assets/characters/cyborg/Cyborg_idle_inverted.png"
+        },
+        "run_right": {
+            img: new Image(),
+            src: "./assets/characters/cyborg/Cyborg_run.png"
+        },
+        "run_left": {
+            img: new Image(),
+            src: "./assets/characters/cyborg/Cyborg_run_inverted.png"
+        }
     }
 );
 
@@ -144,10 +157,22 @@ const player2 = new Player(
     4,
     0,
     {
-        "idle":"./assets/characters/biker/Biker_idle_inverted.png",
-        "run_left": "./assets/characters/biker/Biker_run_inverted.png",
-        "run_right": "./assets/characters/biker/Biker_run.png"
- 
+        "idle_left": {
+            img: new Image(),
+            src: "./assets/characters/biker/Biker_idle_inverted.png"
+        },
+        "idle_right": {
+            img: new Image(),
+            src: "./assets/characters/biker/Biker_idle.png"
+        },
+        "run_right": {
+            img: new Image(),
+            src: "./assets/characters/biker/Biker_run.png"
+        },
+        "run_left": {
+            img: new Image(),
+            src: "./assets/characters/biker/Biker_run_inverted.png"
+        }
     }
 );
 
@@ -175,11 +200,22 @@ const animate = () => {
 
     // horizontal controls
     if (keys.a.pressed && player1.lastKey === 'a') {
-        player1.velocity.x = -2;
+        player1.velocity.x = -5;
+        player1.image = player1.sprites["run_left"]["img"];
+        player1.image.src = player1.sprites["run_left"]["src"];
+        player1.totalFrames = 6;
+        player1.direction = "left"
     } else if (keys.d.pressed && player1.lastKey === 'd') {
-        player1.velocity.x = 2;
+        player1.velocity.x = 5;
+        player1.image = player1.sprites["run_right"]["img"];
+        player1.image.src = player1.sprites["run_right"]["src"];
+        player1.totalFrames = 6;
+        player1.direction = "right"
     } else {
         player1.velocity.x = 0;
+        player1.image = player1.sprites["idle_right"]["img"];
+        player1.image.src = player1.sprites[player1.direction === "left" ? "idle_left" : "idle_right"]["src"];
+        player1.totalFrames = 4;
     }
 
     // crouch and jump controls
@@ -198,15 +234,26 @@ const animate = () => {
     } 
 
 
-    // enemy animation controls
+    // player2 animation controls
 
     // horizontal controls
     if (keys.leftArrow.pressed && player2.lastKey === 'ArrowLeft') {
-        player2.velocity.x = -2;
+        player2.velocity.x = -5;
+        player2.image = player2.sprites["run_left"]["img"];
+        player2.image.src = player2.sprites["run_left"]["src"];
+        player2.totalFrames = 6;
+        player2.direction = "left"
     } else if (keys.rightArrow.pressed && player2.lastKey === 'ArrowRight') {
-        player2.velocity.x = 2;
+        player2.velocity.x = 5;
+        player2.image = player2.sprites["run_right"]["img"];
+        player2.image.src = player2.sprites["run_right"]["src"];
+        player2.totalFrames = 6;
+        player2.direction = "right"
     } else {
         player2.velocity.x = 0;
+        player2.image = player2.sprites["idle_right"]["img"];
+        player2.image.src = player2.sprites[player2.direction === "left" ? "idle_left" : "idle_right"]["src"];
+        player2.totalFrames = 4;
     }
 
     // crouch and jump controls
@@ -262,16 +309,10 @@ window.addEventListener('keydown', (event) => {
         case 'd':
             keys.d.pressed = true;
             player1.lastKey = 'd';
-            player1.image = new Image();
-            player1.image.src = player1.sprites["run_right"]
-            player1.totalFrames = 6;
             break
         case 'a':
             keys.a.pressed = true;
             player1.lastKey = 'a';
-            player1.image = new Image();
-            player1.image.src = player1.sprites["run_left"]
-            player1.totalFrames = 6;
             break
         case 's':
             keys.s.pressed = true;
@@ -286,16 +327,10 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowRight':
             keys.rightArrow.pressed = true;
             player2.lastKey = 'ArrowRight';
-            player2.image = new Image();
-            player2.image.src = player2.sprites["run_right"];
-            player2.totalFrames = 6;
             break
         case 'ArrowLeft':
             keys.leftArrow.pressed = true;
             player2.lastKey = 'ArrowLeft';
-            player2.image = new Image();
-            player2.image.src = player2.sprites["run_left"];
-            player2.totalFrames = 6;
             break
         case 'ArrowDown':
             keys.downArrow.pressed = true;
@@ -323,19 +358,10 @@ window.addEventListener('keyup', (event) => {
             // reset the last key to the opposite key so that if
             // both keys are held the character will move in the correct direction
             player1.lastKey = 'a';
-
-            player1.image = new Image();
-            player1.image.src = player1.sprites["idle"];
-            player1.totalFrames = 4;
-
             break
         case 'a':
             keys.a.pressed = false;
             player1.lastKey = 'd';
-
-            player1.image = new Image();
-            player1.image.src = player1.sprites["idle"];
-            player1.totalFrames = 4;
             break
         case 's':
             keys.s.pressed = false;
@@ -345,17 +371,10 @@ window.addEventListener('keyup', (event) => {
             break;
         case 'ArrowRight':
             keys.rightArrow.pressed = false;
-            player2.lastKey = 'ArrowLeft';
-            player2.image = new Image();
-            player2.image.src = player2.sprites["idle"];
-            player2.totalFrames = 4;
             break
         case 'ArrowLeft':
             keys.leftArrow.pressed = false;
             player2.lastKey = 'ArrowRight';
-            player2.image = new Image();
-            player2.image.src = player2.sprites["idle"];
-            player2.totalFrames = 4;
             break
         case 'ArrowDown':
             keys.downArrow.pressed = false;
