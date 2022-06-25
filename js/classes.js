@@ -10,6 +10,7 @@ class Sprite {
         this.totalFrames = totalFrames;
         this.framesElapsed = 0;
         this.currentFrame = currentFrame;
+
     }
 
     draw() {
@@ -24,6 +25,8 @@ class Sprite {
             this.image.width / this.totalFrames * this.scale, 
             this.image.height * this.scale);
     }
+
+
 
     update() {
         this.framesElapsed++;
@@ -145,8 +148,11 @@ class Player extends Sprite {
                 x: this.position.x + (this.direction === "left" ? this.image.width / (this.totalFrames - 2) : 0),
                 y: this.position.y
             },
-            width: this.image.width / this.totalFrames * this.scale / 2, 
-            height: this.image.height * this.scale
+
+            // on Chrome, the this.image.{width / height} values are undefined
+            // so they are hardcoded here based on the PNG file size 
+            width: 192 / this.totalFrames * this.scale / 2, 
+            height: 48 * this.scale
         }
     }
 
@@ -161,7 +167,8 @@ class Player extends Sprite {
     draw() {
         if (this.rectangle) {
 
-            // draw the sprite background for testing purposes
+
+            // draw the sprite hitbox for testing purposes
             ctx.fillStyle = 'red';
             ctx.fillRect(
                 this.hitbox.position.x,
@@ -205,8 +212,6 @@ class Player extends Sprite {
 
         // bounds on the y-axis
         if (this.position.y + this.height >= canvas.height + 150) {
-
-            console.log("here!");
             
             // the player is no longer falling
             this.falling = false;

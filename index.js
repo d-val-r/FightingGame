@@ -114,7 +114,9 @@ player1.rectangle = true;
 //     },
 //     "right");
 
-player1.draw();
+const width = player1.draw();
+
+console.log(width);
 
 // const player2 = new Fighter(
 //     50, 
@@ -225,7 +227,7 @@ const animate = () => {
             player1.isAttacking = false;
             player2.health -= 10;
             document.querySelector("#health2").style.width = `${player2.health}%`;
-        }
+        } 
 
     // attack controls for player 2
     if (player2.attackBox.position.x <= player1.hitbox.position.x + player1.hitbox.width
