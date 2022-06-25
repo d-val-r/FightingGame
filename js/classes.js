@@ -229,4 +229,34 @@ class Player extends Sprite {
         }
 
     }
+
+    switchSprite(sprite) {
+        switch (sprite) {
+            case "idle_left":
+                if (this.image.src !== this.sprites["idle_left"]["src"]) {
+                    this.image.src = this.sprites["idle_left"]["src"];
+                    this.totalFrames = 4;
+                }
+                break;
+            case "idle_right":
+                if (this.image.src !== this.sprites["idle_right"]["src"]) {
+                    this.image.src = this.sprites["idle_right"]["src"];
+                    this.totalFrames = 4;
+                }
+                break;
+            case "run_left":
+                if (this.image.src !== this.sprites["run_left"]["src"]) {
+                    this.image.src = this.sprites["run_left"]["src"];
+                    this.totalFrames = 6;
+                }
+                break;
+            case "run_right":
+                if (this.image.src !== this.sprites["run_right"]["src"]) {
+                    this.image.src = this.sprites["run_right"]["src"];
+                    this.totalFrames = 6;
+                }
+                break;
+        }
+
+    }
 }

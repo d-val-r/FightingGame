@@ -200,26 +200,20 @@ const animate = () => {
 
 
     
-    // player animation controls
+    // player 1 animation controls
 
     // horizontal controls
     if (keys.a.pressed && player1.lastKey === 'a') {
         player1.velocity.x = -5;
-        player1.image = player1.sprites["run_left"]["img"];
-        player1.image.src = player1.sprites["run_left"]["src"];
-        player1.totalFrames = 6;
+        player1.switchSprite("run_left");
         player1.direction = "left"
     } else if (keys.d.pressed && player1.lastKey === 'd') {
         player1.velocity.x = 5;
-        player1.image = player1.sprites["run_right"]["img"];
-        player1.image.src = player1.sprites["run_right"]["src"];
-        player1.totalFrames = 6;
+        player1.switchSprite("run_right");
         player1.direction = "right"
     } else {
         player1.velocity.x = 0;
-        player1.image = player1.sprites["idle_right"]["img"];
-        player1.image.src = player1.sprites[player1.direction === "left" ? "idle_left" : "idle_right"]["src"];
-        player1.totalFrames = 4;
+        player1.switchSprite(player1.direction === "left" ? "idle_left" : "idle_right");
     }
 
     // crouch and jump controls
@@ -243,21 +237,15 @@ const animate = () => {
     // horizontal controls
     if (keys.leftArrow.pressed && player2.lastKey === 'ArrowLeft') {
         player2.velocity.x = -5;
-        // player2.image = player2.sprites["run_left"]["img"];
-        player2.image.src = player2.sprites["run_left"]["src"];
-        player2.totalFrames = 6;
+        player2.switchSprite("run_left")
         player2.direction = "left"
     } else if (keys.rightArrow.pressed && player2.lastKey === 'ArrowRight') {
         player2.velocity.x = 5;
-        // player2.image = player2.sprites["run_right"]["img"];
-        player2.image.src = player2.sprites["run_right"]["src"];
-        player2.totalFrames = 6;
+        player2.switchSprite("run_right")
         player2.direction = "right"
     } else {
         player2.velocity.x = 0;
-        // player2.image = player2.sprites["idle_right"]["img"];
-        player2.image.src = player2.sprites[player2.direction === "left" ? "idle_left" : "idle_right"]["src"];
-        player2.totalFrames = 4;
+        player2.switchSprite(player2.direction === "left" ? "idle_left" : "idle_right");
     }
 
     // crouch and jump controls
