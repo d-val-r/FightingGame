@@ -98,10 +98,15 @@ const player1 = new Player(
     "./assets/characters/cyborg/Cyborg_idle.png",
     4.0,
     4,
-    0
+    0,
+    {
+        "idle": "./assets/characters/cyborg/Cyborg_idle.png",
+        "run_right": "./assets/characters/cyborg/Cyborg_run.png",
+        "run_left": "./assets/characters/cyborg/Cyborg_run_inverted.png"
+    }
 );
 
-player1.rectangle = true;
+// player1.rectangle = true;
 
 // const player1 = new Fighter(
 //     50, 
@@ -114,9 +119,6 @@ player1.rectangle = true;
 //     },
 //     "right");
 
-const width = player1.draw();
-
-console.log(width);
 
 // const player2 = new Fighter(
 //     50, 
@@ -140,10 +142,16 @@ const player2 = new Player(
     "./assets/characters/biker/Biker_idle_inverted.png",
     4.0,
     4,
-    0
+    0,
+    {
+        "idle":"./assets/characters/biker/Biker_idle_inverted.png",
+        "run_left": "./assets/characters/biker/Biker_run_inverted.png",
+        "run_right": "./assets/characters/biker/Biker_run.png"
+ 
+    }
 );
 
-player2.rectangle = true;
+// player2.rectangle = true;
 
 player2.draw();
 
@@ -254,10 +262,16 @@ window.addEventListener('keydown', (event) => {
         case 'd':
             keys.d.pressed = true;
             player1.lastKey = 'd';
+            player1.image = new Image();
+            player1.image.src = player1.sprites["run_right"]
+            player1.totalFrames = 6;
             break
         case 'a':
             keys.a.pressed = true;
             player1.lastKey = 'a';
+            player1.image = new Image();
+            player1.image.src = player1.sprites["run_left"]
+            player1.totalFrames = 6;
             break
         case 's':
             keys.s.pressed = true;
@@ -272,10 +286,16 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowRight':
             keys.rightArrow.pressed = true;
             player2.lastKey = 'ArrowRight';
+            player2.image = new Image();
+            player2.image.src = player2.sprites["run_right"];
+            player2.totalFrames = 6;
             break
         case 'ArrowLeft':
             keys.leftArrow.pressed = true;
             player2.lastKey = 'ArrowLeft';
+            player2.image = new Image();
+            player2.image.src = player2.sprites["run_left"];
+            player2.totalFrames = 6;
             break
         case 'ArrowDown':
             keys.downArrow.pressed = true;
@@ -303,10 +323,19 @@ window.addEventListener('keyup', (event) => {
             // reset the last key to the opposite key so that if
             // both keys are held the character will move in the correct direction
             player1.lastKey = 'a';
+
+            player1.image = new Image();
+            player1.image.src = player1.sprites["idle"];
+            player1.totalFrames = 4;
+
             break
         case 'a':
             keys.a.pressed = false;
             player1.lastKey = 'd';
+
+            player1.image = new Image();
+            player1.image.src = player1.sprites["idle"];
+            player1.totalFrames = 4;
             break
         case 's':
             keys.s.pressed = false;
@@ -317,10 +346,16 @@ window.addEventListener('keyup', (event) => {
         case 'ArrowRight':
             keys.rightArrow.pressed = false;
             player2.lastKey = 'ArrowLeft';
+            player2.image = new Image();
+            player2.image.src = player2.sprites["idle"];
+            player2.totalFrames = 4;
             break
         case 'ArrowLeft':
             keys.leftArrow.pressed = false;
             player2.lastKey = 'ArrowRight';
+            player2.image = new Image();
+            player2.image.src = player2.sprites["idle"];
+            player2.totalFrames = 4;
             break
         case 'ArrowDown':
             keys.downArrow.pressed = false;

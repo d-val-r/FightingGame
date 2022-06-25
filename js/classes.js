@@ -125,7 +125,7 @@ class Fighter {
 
 
 class Player extends Sprite {
-    constructor(width, height, position, velocity, direction, imgSrc, scale, totalFrames, currentFrame) {
+    constructor(width, height, position, velocity, direction, imgSrc, scale, totalFrames, currentFrame, sprites = {}) {
         super(width, height, position, imgSrc, scale, totalFrames, currentFrame);
         this.velocity = velocity;
         this.crouch = false;
@@ -153,7 +153,8 @@ class Player extends Sprite {
             // so they are hardcoded here based on the PNG file size 
             width: 192 / this.totalFrames * this.scale / 2, 
             height: 48 * this.scale
-        }
+        };
+        this.sprites = sprites;
     }
 
     attack() {
