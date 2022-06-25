@@ -155,6 +155,7 @@ class Player extends Sprite {
             height: 48 * this.scale
         };
         this.sprites = sprites;
+        this.stance = `idle_${this.direction}`;
     }
 
     attack() {
@@ -230,31 +231,51 @@ class Player extends Sprite {
 
     }
 
+    // handles transitioning the backing source of the image to the appropriate PNG
+    // and sets the total and current frames accordingly
     switchSprite(sprite) {
+
+        // setting this.currentFrame to 0 must happen individually for each case
+        // because it only gets set if sprite matches a case AND the stance
+        // is different from the sprite; otherwise, it's a change of sprites, 
+        // but not a change of stances (i.e. the game loop is checking to see
+        // if a sprite needs to change), and so the currentFrame must NOT be
+        // reset
+
         switch (sprite) {
             case "idle_left":
-                if (this.image.src !== this.sprites["idle_left"]["src"]) {
+                if (this.stance !== "idle_left") {
                     this.image.src = this.sprites["idle_left"]["src"];
+                    this.stance = "idle_left";
+                    this.currentFrame = 0;
                     this.totalFrames = 4;
                 }
                 break;
             case "idle_right":
-                if (this.image.src !== this.sprites["idle_right"]["src"]) {
+                if (this.stance !== "idle_right") {
                     this.image.src = this.sprites["idle_right"]["src"];
+                    this.stance = "idle_right"
+                    this.currentFrame = 0;
                     this.totalFrames = 4;
                 }
                 break;
             case "run_left":
-                if (this.image.src !== this.sprites["run_left"]["src"]) {
+                if (this.stance !== "run_left") {
                     this.image.src = this.sprites["run_left"]["src"];
+                    this.stance = "run_left"
+                    this.currentFrame = 0;
                     this.totalFrames = 6;
                 }
                 break;
             case "run_right":
-                if (this.image.src !== this.sprites["run_right"]["src"]) {
+                if (this.stance !== "run_right") {
                     this.image.src = this.sprites["run_right"]["src"];
+                    this.stance = "run_right";
+                    this.currentFrame = 0;
                     this.totalFrames = 6;
                 }
+                break;
+            default:
                 break;
         }
 

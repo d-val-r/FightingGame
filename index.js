@@ -101,23 +101,23 @@ const player1 = new Player(
     0,
     {
         "idle_right": {
-            img: new Image(),
+            stance: "idle_right",
             src: "./assets/characters/cyborg/Cyborg_idle.png"
         },
         "idle_left": {
-            img: new Image(),
+            stance: "idle_left",
             src: "./assets/characters/cyborg/Cyborg_idle_inverted.png"
         },
         "run_right": {
-            img: new Image(),
+            stance: "run_right",
             src: "./assets/characters/cyborg/Cyborg_run.png"
         },
         "run_left": {
-            img: new Image(),
+            stance: "run_left",
             src: "./assets/characters/cyborg/Cyborg_run_inverted.png"
         },
         "attack_right": {
-            img: new Image(),
+            stance: "attack_right",
             src: "./assets/characters/cyborg/Cyborg_attack1.png"
         }
     }
@@ -162,19 +162,22 @@ const player2 = new Player(
     0,
     {
         "idle_left": {
-            img: new Image(),
+            
+            // stance is used for comparison purposes, as the filename 
+            // recieves an added prefix after becoming the image source
+            stance: "idle_left",
             src: "./assets/characters/biker/Biker_idle_inverted.png"
         },
         "idle_right": {
-            img: new Image(),
+            stance: "idle_right",
             src: "./assets/characters/biker/Biker_idle.png"
         },
         "run_right": {
-            img: new Image(),
+            stance: "run_right",
             src: "./assets/characters/biker/Biker_run.png"
         },
         "run_left": {
-            img: new Image(),
+            stance: "run_left",
             src: "./assets/characters/biker/Biker_run_inverted.png"
         }
     }
