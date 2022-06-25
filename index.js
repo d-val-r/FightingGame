@@ -115,6 +115,10 @@ const player1 = new Player(
         "run_left": {
             img: new Image(),
             src: "./assets/characters/cyborg/Cyborg_run_inverted.png"
+        },
+        "attack_right": {
+            img: new Image(),
+            src: "./assets/characters/cyborg/Cyborg_attack1.png"
         }
     }
 );
@@ -239,19 +243,19 @@ const animate = () => {
     // horizontal controls
     if (keys.leftArrow.pressed && player2.lastKey === 'ArrowLeft') {
         player2.velocity.x = -5;
-        player2.image = player2.sprites["run_left"]["img"];
+        // player2.image = player2.sprites["run_left"]["img"];
         player2.image.src = player2.sprites["run_left"]["src"];
         player2.totalFrames = 6;
         player2.direction = "left"
     } else if (keys.rightArrow.pressed && player2.lastKey === 'ArrowRight') {
         player2.velocity.x = 5;
-        player2.image = player2.sprites["run_right"]["img"];
+        // player2.image = player2.sprites["run_right"]["img"];
         player2.image.src = player2.sprites["run_right"]["src"];
         player2.totalFrames = 6;
         player2.direction = "right"
     } else {
         player2.velocity.x = 0;
-        player2.image = player2.sprites["idle_right"]["img"];
+        // player2.image = player2.sprites["idle_right"]["img"];
         player2.image.src = player2.sprites[player2.direction === "left" ? "idle_left" : "idle_right"]["src"];
         player2.totalFrames = 4;
     }
