@@ -1,3 +1,8 @@
+
+// used to replicate effect of gravity on an object
+const GRAVITY = 0.4;
+
+
 // represents any rendered sprite
 class Sprite {
     constructor(width, height, position, imgSrc, scale = 1, totalFrames = 1, currentFrame = -1) {
@@ -104,21 +109,21 @@ class Fighter {
         }
 
         // bounds on the y-axis
-        if (this.position.y + this.height >= canvas.height) {
+        // if (this.position.y + this.height >= canvas.height) {
             
-            // the player is no longer falling
-            this.falling = false;
-            this.velocity.y = 0;
+        //     // the player is no longer falling
+        //     this.falling = false;
+        //     this.velocity.y = 0;
 
-            // if the sprite gets to high, simulate the jump ending
-            // by telling the program the user is no longer holding the jump button
-            // does not actually impact the user's ability to press the button
-        } else if (this.position.y >= 300) {
-            keys.w.pressed = false;
-            keys.upArrow.pressed = false;
-        } else {
-            this.velocity.y += GRAVITY;
-        }
+        //     // if the sprite gets to high, simulate the jump ending
+        //     // by telling the program the user is no longer holding the jump button
+        //     // does not actually impact the user's ability to press the button
+        // } else if (this.position.y >= 300) {
+        //     // keys.w.pressed = false;
+        //     // keys.upArrow.pressed = false;
+        // } else {
+        //     this.velocity.y += GRAVITY;
+        // }
 
     }
 }
@@ -213,7 +218,7 @@ class Player extends Sprite {
         }
 
         // bounds on the y-axis
-        if (this.position.y + this.height >= canvas.height + 150) {
+        if (this.position.y + this.height >= canvas.height - 100) {
             
             // the player is no longer falling
             this.falling = false;
@@ -225,6 +230,7 @@ class Player extends Sprite {
         } else if (this.position.y >= 300) {
             keys.w.pressed = false;
             keys.upArrow.pressed = false;
+            this.falling = false;
         } else {
             this.velocity.y += GRAVITY;
         }

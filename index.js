@@ -1,5 +1,3 @@
-// used to replicate effect of gravity on an object
-const GRAVITY = 0.4;
 
 // timer controls
 let timerValue = 60;
@@ -92,7 +90,7 @@ const background = new Sprite(
 const player1 = new Player(
     50, 
     150, 
-    {x:0, y:canvas.height - 200}, 
+    {x:0, y:canvas.height - 300}, 
     {x: 0, y:0},
     "right",
     "./assets/characters/cyborg/Cyborg_idle.png",
@@ -153,7 +151,7 @@ const player1 = new Player(
 const player2 = new Player(
     50, 
     150, 
-    {x:canvas.width - 250, y:canvas.height - 200},
+    {x:canvas.width - 250, y:canvas.height - 300},
     {x: 0, y:0},
     "left",
     "./assets/characters/biker/Biker_idle_inverted.png",
@@ -191,6 +189,9 @@ player2.draw();
 // create an infinite animation loop that relies on the velocities 
 // of the sprites to animate them; keypresses alter the velocity
 const animate = () => {
+
+    console.log(player1.position.y);
+
     window.requestAnimationFrame(animate);
     ctx.clearRect(0,0, canvas.width, canvas.height);
     // ctx.fillStyle = 'black';
@@ -362,7 +363,7 @@ window.addEventListener('keyup', (event) => {
             keys.s.pressed = false;
             break;
         case 'w':
-            keys.w.pressed = false;
+            // keys.w.pressed = false;
             break;
         case 'ArrowRight':
             keys.rightArrow.pressed = false;
