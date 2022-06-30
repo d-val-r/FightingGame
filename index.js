@@ -364,9 +364,6 @@ window.addEventListener('keyup', (event) => {
         case 's':
             keys.s.pressed = false;
             break;
-        case 'w':
-            keys.w.pressed = false;
-            break;
         case 'ArrowRight':
             keys.rightArrow.pressed = false;
             break
@@ -376,9 +373,6 @@ window.addEventListener('keyup', (event) => {
             break
         case 'ArrowDown':
             keys.downArrow.pressed = false;
-            break;
-        case 'ArrowUP':
-            keys.upArrow.pressed = false;
             break;
     }
 });
