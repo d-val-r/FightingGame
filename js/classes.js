@@ -130,7 +130,7 @@ class Fighter {
 
 
 class Player extends Sprite {
-    constructor(width, height, position, velocity, direction, imgSrc, scale, totalFrames, currentFrame, sprites = {}) {
+    constructor(width, height, position, velocity, direction, imgSrc, scale, totalFrames, currentFrame, sprites = {}, keyset) {
         super(width, height, position, imgSrc, scale, totalFrames, currentFrame);
         this.velocity = velocity;
         this.crouch = false;
@@ -161,6 +161,7 @@ class Player extends Sprite {
         };
         this.sprites = sprites;
         this.stance = `idle_${this.direction}`;
+        this.keyset = keyset
     }
 
     attack() {
@@ -218,19 +219,19 @@ class Player extends Sprite {
         }
 
         // bounds on the y-axis
+
+        // this is the baseline at which character's stand 
         if (this.position.y + this.height >= canvas.height - 100) {
             
             // the player is no longer falling
             this.falling = false;
             this.velocity.y = 0;
 
-            // if the sprite gets to high, simulate the jump ending
+            // if the sprite gets too high, simulate the jump ending
             // by telling the program the user is no longer holding the jump button
             // does not actually impact the user's ability to press the button
-        } else if (this.position.y >= 300) {
-            keys.w.pressed = false;
-            keys.upArrow.pressed = false;
-            this.falling = false;
+        } else if (this.position.y <= 200 && (keys.w.pressed || keys.upArrow.pressed)) {
+            this.keyset === "wasd" ? keys.w.pressed = false : keys.upArrow.pressed = false;
         } else {
             this.velocity.y += GRAVITY;
         }

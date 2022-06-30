@@ -118,7 +118,8 @@ const player1 = new Player(
             stance: "attack_right",
             src: "./assets/characters/cyborg/Cyborg_attack1.png"
         }
-    }
+    },
+    "wasd"
 );
 
 // player1.rectangle = true;
@@ -178,7 +179,8 @@ const player2 = new Player(
             stance: "run_left",
             src: "./assets/characters/biker/Biker_run_inverted.png"
         }
-    }
+    },
+    "arrows"
 );
 
 // player2.rectangle = true;
@@ -363,7 +365,7 @@ window.addEventListener('keyup', (event) => {
             keys.s.pressed = false;
             break;
         case 'w':
-            // keys.w.pressed = false;
+            keys.w.pressed = false;
             break;
         case 'ArrowRight':
             keys.rightArrow.pressed = false;
