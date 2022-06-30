@@ -161,7 +161,7 @@ class Player extends Sprite {
         };
         this.sprites = sprites;
         this.stance = `idle_${this.direction}`;
-        this.keyset = keyset
+        this.keyset = keyset;
     }
 
     attack() {
@@ -230,8 +230,9 @@ class Player extends Sprite {
             // if the sprite gets too high, simulate the jump ending
             // by telling the program the user is no longer holding the jump button
             // does not actually impact the user's ability to press the button
-        } else if (this.position.y <= 200 && (keys.w.pressed || keys.upArrow.pressed)) {
+        } else if (this.position.y <= 200 && !this.falling) {
             this.keyset === "wasd" ? keys.w.pressed = false : keys.upArrow.pressed = false;
+            this.falling = true;
         } else {
             this.velocity.y += GRAVITY;
         }
