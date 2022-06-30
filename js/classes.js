@@ -280,4 +280,16 @@ class Player extends Sprite {
         }
 
     }
+
+    // used to reverse direction of character movement and adjust their horizontal
+    // position to account for the change in animations displacing them
+    changeDirection(dir) {
+        
+        // ensure the direction is changing
+        if (this.direction !== dir) {
+            this.position.x += (dir === "right" ? 30 : -30);
+
+            this.direction = dir;
+        }
+    }
 }

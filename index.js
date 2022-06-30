@@ -209,11 +209,11 @@ const animate = () => {
     if (keys.a.pressed && player1.lastKey === 'a') {
         player1.velocity.x = -5;
         player1.switchSprite("run_left");
-        player1.direction = "left"
+        player1.changeDirection("left");
     } else if (keys.d.pressed && player1.lastKey === 'd') {
         player1.velocity.x = 5;
         player1.switchSprite("run_right");
-        player1.direction = "right"
+        player1.changeDirection("right");
     } else {
         player1.velocity.x = 0;
         player1.switchSprite(player1.direction === "left" ? "idle_left" : "idle_right");
@@ -241,11 +241,11 @@ const animate = () => {
     if (keys.leftArrow.pressed && player2.lastKey === 'ArrowLeft') {
         player2.velocity.x = -5;
         player2.switchSprite("run_left")
-        player2.direction = "left"
+        player2.changeDirection("left");
     } else if (keys.rightArrow.pressed && player2.lastKey === 'ArrowRight') {
         player2.velocity.x = 5;
         player2.switchSprite("run_right")
-        player2.direction = "right"
+        player2.changeDirection("right");
     } else {
         player2.velocity.x = 0;
         player2.switchSprite(player2.direction === "left" ? "idle_left" : "idle_right");
