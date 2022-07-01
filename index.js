@@ -100,23 +100,33 @@ const player1 = new Player(
     {
         "idle_right": {
             stance: "idle_right",
-            src: "./assets/characters/cyborg/Cyborg_idle.png"
+            src: "./assets/characters/cyborg/Cyborg_idle.png",
+            mod: 17
         },
         "idle_left": {
             stance: "idle_left",
-            src: "./assets/characters/cyborg/Cyborg_idle_inverted.png"
+            src: "./assets/characters/cyborg/Cyborg_idle_inverted.png",
+            mod: 17
         },
         "run_right": {
             stance: "run_right",
-            src: "./assets/characters/cyborg/Cyborg_run.png"
+            src: "./assets/characters/cyborg/Cyborg_run.png",
+            mod: 7
         },
         "run_left": {
             stance: "run_left",
-            src: "./assets/characters/cyborg/Cyborg_run_inverted.png"
+            src: "./assets/characters/cyborg/Cyborg_run_inverted.png",
+            mod: 7
         },
         "attack_right": {
             stance: "attack_right",
-            src: "./assets/characters/cyborg/Cyborg_attack1.png"
+            src: "./assets/characters/cyborg/Cyborg_attack1.png",
+            mod: 7
+        },
+        "jump": {
+            stance: "jump",
+            src: "./assets/characters/cyborg/Cyborg_jump.png",
+            mod: 15
         }
     },
     "wasd"
@@ -165,19 +175,28 @@ const player2 = new Player(
             // stance is used for comparison purposes, as the filename 
             // recieves an added prefix after becoming the image source
             stance: "idle_left",
-            src: "./assets/characters/biker/Biker_idle_inverted.png"
+            src: "./assets/characters/biker/Biker_idle_inverted.png",
+            mod: 17
         },
         "idle_right": {
             stance: "idle_right",
-            src: "./assets/characters/biker/Biker_idle.png"
+            src: "./assets/characters/biker/Biker_idle.png",
+            mod: 17
         },
         "run_right": {
             stance: "run_right",
-            src: "./assets/characters/biker/Biker_run.png"
+            src: "./assets/characters/biker/Biker_run.png",
+            mod: 7
         },
         "run_left": {
             stance: "run_left",
-            src: "./assets/characters/biker/Biker_run_inverted.png"
+            src: "./assets/characters/biker/Biker_run_inverted.png",
+            mod: 13 
+        },
+        "jump": {
+            stance: "jump",
+            src: "./assets/characters/biker/Biker_jump.png",
+            mod: 15
         }
     },
     "arrows"
@@ -191,9 +210,7 @@ player2.draw();
 // create an infinite animation loop that relies on the velocities 
 // of the sprites to animate them; keypresses alter the velocity
 const animate = () => {
-
-    console.log(player1.position.y);
-
+    
     window.requestAnimationFrame(animate);
     ctx.clearRect(0,0, canvas.width, canvas.height);
     // ctx.fillStyle = 'black';
@@ -268,6 +285,15 @@ const animate = () => {
     if (keys.upArrow.pressed && !player2.falling) {
         player2.velocity.y = -5;
     } 
+
+
+    if (player1.velocity.y != 0) {
+        player1.switchSprite("jump");
+    }
+
+    if (player2.velocity.y != 0) {
+        player2.switchSprite("jump");
+    }
 
 
     // attacking controls for player 1

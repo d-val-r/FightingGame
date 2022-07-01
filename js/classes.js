@@ -1,4 +1,3 @@
-
 // used to replicate effect of gravity on an object
 const GRAVITY = 0.4;
 
@@ -33,9 +32,12 @@ class Sprite {
 
 
 
-    update() {
+    // the mod value represents how often to update a frame
+    // for a background, use the static value of 17; for Players,
+    // use a dynamic value
+    update(mod = 17) {
         this.framesElapsed++;
-        if (this.framesElapsed % 17 === 0) {
+        if (this.framesElapsed % mod === 0) {
             this.currentFrame = (this.currentFrame === -1 ? -1 : (this.currentFrame  + 1) % this.totalFrames);
         }
 
@@ -162,6 +164,7 @@ class Player extends Sprite {
         this.sprites = sprites;
         this.stance = `idle_${this.direction}`;
         this.keyset = keyset;
+        this.mod = sprites[this.stance]["mod"];
     }
 
     attack() {
@@ -197,7 +200,7 @@ class Player extends Sprite {
 
     update() {
         
-        super.update();
+        super.update(this.mod);
         
         // update the sprite's position
         this.position.x += this.velocity.x;
@@ -258,6 +261,7 @@ class Player extends Sprite {
                     this.currentFrame = 0;
                     this.totalFrames = 4;
                 }
+                this.mod = this.sprites["idle_left"]["mod"];
                 break;
             case "idle_right":
                 if (this.stance !== "idle_right") {
@@ -266,6 +270,7 @@ class Player extends Sprite {
                     this.currentFrame = 0;
                     this.totalFrames = 4;
                 }
+                this.mod = this.sprites["idle_right"]["mod"];
                 break;
             case "run_left":
                 if (this.stance !== "run_left") {
@@ -274,6 +279,7 @@ class Player extends Sprite {
                     this.currentFrame = 0;
                     this.totalFrames = 6;
                 }
+                this.mod = this.sprites["run_left"]["mod"];
                 break;
             case "run_right":
                 if (this.stance !== "run_right") {
@@ -281,6 +287,18 @@ class Player extends Sprite {
                     this.stance = "run_right";
                     this.currentFrame = 0;
                     this.totalFrames = 6;
+                }
+                this.mod = this.sprites["run_right"]["mod"];
+                break;
+            case "jump":
+                if (this.stance !== "jump") {
+                    console.log(`${this.stance}: ${this.stance === 'jump'}`)
+                    this.image.src = this.sprites["jump"]["src"];
+                    this.stance = "jump";
+                    this.currentFrame = 0;
+                    this.totalFrames = 4;
+                    console.log(`Here ${Math.random()}`);
+                    this.mod = this.sprites["jump"]["mod"];
                 }
                 break;
             default:
