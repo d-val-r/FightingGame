@@ -124,7 +124,7 @@ const player1 = new Player(
             mod: 7
         },
         "jump": {
-            stance: "jump",
+            // jumping does not make use of a stance; instead, the Player has an internal jumping boolean 
             src: "./assets/characters/cyborg/Cyborg_jump.png",
             mod: 15
         }
@@ -287,13 +287,15 @@ const animate = () => {
     } 
 
 
-    if (player1.velocity.y != 0) {
-        player1.switchSprite("jump");
-    }
+    // if (player1.velocity.y === 0) {
+    //     // player1.switchSprite("jump");
+    //     player1.jumping = false;
+    // }
 
-    if (player2.velocity.y != 0) {
-        player2.switchSprite("jump");
-    }
+    // if (player2.velocity.y === 0) {
+    //     // player2.switchSprite("jump");
+    //     player2.jumping = false;
+    // }
 
 
     // attacking controls for player 1
@@ -347,6 +349,8 @@ window.addEventListener('keydown', (event) => {
             // set the sprite's falling variable to true; that way, the user cannot
             // keep clicking 'w' (or up arrow) to "double jump"
             player1.falling = true;
+            player1.jumping = true;
+            player1.switchSprite("jump")
             break;
         case 'ArrowRight':
             keys.rightArrow.pressed = true;

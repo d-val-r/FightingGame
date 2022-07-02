@@ -165,6 +165,7 @@ class Player extends Sprite {
         this.stance = `idle_${this.direction}`;
         this.keyset = keyset;
         this.mod = sprites[this.stance]["mod"];
+        this.jumping = false;
     }
 
     attack() {
@@ -291,8 +292,8 @@ class Player extends Sprite {
                 this.mod = this.sprites["run_right"]["mod"];
                 break;
             case "jump":
-                if (this.stance !== "jump") {
-                    console.log(`${this.stance}: ${this.stance === 'jump'}`)
+                if (this.jumping) {
+                    this.jumping = false;
                     this.image.src = this.sprites["jump"]["src"];
                     this.stance = "jump";
                     this.currentFrame = 0;
