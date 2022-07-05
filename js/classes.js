@@ -102,10 +102,12 @@ class Player extends Sprite {
         this.keyset = keyset;
         this.mod = sprites[this.stance]["mod"];
         this.jumping = false;
+        this.attackAnimation = false;
     }
 
     attack() {
         this.isAttacking = true
+        this.attackAnimation = true;
         setTimeout(() => {
             this.isAttacking = false;
         }, 100);
@@ -184,6 +186,7 @@ class Player extends Sprite {
     // and sets the total and current frames accordingly
     switchSprite(sprite) {
 
+
         // setting this.currentFrame to 0 must happen individually for each case
         // because it only gets set if sprite matches a case AND the stance
         // is different from the sprite; otherwise, it's a change of sprites, 
@@ -197,6 +200,8 @@ class Player extends Sprite {
         sprite = this.jumping ? `jump_${this.direction}` : sprite;
 
         this.iterator = this.jumping ? -1 : 1;
+
+        sprite = this.attackAnimation ? `punch_${this.direction}` : sprite;
 
         switch (sprite) {
             case "idle_left":
@@ -258,6 +263,30 @@ class Player extends Sprite {
                     this.mod = this.sprites["jump_left"]["mod"];
                     console.log(`Jumping!`);
                 }
+                break;
+            case "punch_right":
+                if (this.attackAnimation && this.stance !== "punch_right") {
+                    this.image.src = this.sprites["punch_right"]["src"];
+                    this.stance = "punch_right";
+                    this.totalFrames = 6;
+                    this.currentFrame = 0;
+                }
+                this.mod = this.sprites["punch_right"]["mod"];
+                setTimeout(() => {
+                    this.attackAnimation = false;
+                }, 250);
+                break;
+            case "punch_left":
+                if (this.attackAnimation && this.stance !== "punch_left") {
+                    this.image.src = this.sprites["punch_left"]["src"];
+                    this.stance = "punch_left";
+                    this.totalFrames = 6;
+                    this.currentFrame = 0;
+                }
+                this.mod = this.sprites["punch_left"]["mod"];
+                setTimeout(() => {
+                    this.attackAnimation = false;
+                }, 250);
                 break;
             default:
                 break;

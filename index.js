@@ -10,7 +10,6 @@ let frame = 0;
 
 // game over screen
 const winnerMessage = document.querySelector("#winner-message");
-console.log(winnerMessage);
 winnerMessage.textContent = "";
 
 
@@ -125,6 +124,14 @@ const player1 = new Player(
         "jump_left": {
             src: "./assets/characters/cyborg/Cyborg_jump_inverted.png",
             mod: 37
+        },
+        "punch_right": {
+            src: "./assets/characters/cyborg/Cyborg_attack1.png",
+            mod: 3
+        },
+        "punch_left": {
+            src: "./assets/characters/cyborg/Cyborg_attack1_inverted.png",
+            mod: 3
         }
     },
     "wasd"
@@ -194,6 +201,14 @@ const player2 = new Player(
         "jump_right": {
             src: "./assets/characters/biker/Biker_jump.png",
             mod: 23
+        },
+        "punch_right": {
+            src: "./assets/characters/biker/Biker_attack1.png",
+            mod: 3
+        },
+        "punch_left": {
+            src: "./assets/characters/biker/Biker_attack1_inverted.png",
+            mod: 3
         }
     },
     "arrows"
@@ -207,6 +222,7 @@ player2.draw();
 // create an infinite animation loop that relies on the velocities 
 // of the sprites to animate them; keypresses alter the velocity
 const animate = () => {
+
 
     window.requestAnimationFrame(animate);
     ctx.clearRect(0,0, canvas.width, canvas.height);
@@ -367,9 +383,11 @@ window.addEventListener('keydown', (event) => {
             player2.switchSprite(`jump_${player2.direction}`);
             break;
         case 'f':
+            player1.switchSprite(`punch_${player1.direction}`);
             player1.attack();
             break;
         case ' ':
+            player2.switchSprite(`punch_${player2.direction}`);
             player2.attack();
             break;
     }
