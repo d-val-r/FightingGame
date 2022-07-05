@@ -254,6 +254,11 @@ class Player extends Sprite {
         // if a sprite needs to change), and so the currentFrame must NOT be
         // reset
 
+
+        // if the player is mid-jump, ensure the sprite is set to jump so that
+        // the sprite does not change as the player is in the air
+        sprite = this.jumping ? "jump" : sprite;
+
         switch (sprite) {
             case "idle_left":
                 if (this.stance !== "idle_left") {
@@ -292,14 +297,14 @@ class Player extends Sprite {
                 this.mod = this.sprites["run_right"]["mod"];
                 break;
             case "jump":
-                if (this.jumping) {
-                    this.jumping = false;
+                if (this.jumping && this.stance != "jump") {
+                    // this.jumping = false;
                     this.image.src = this.sprites["jump"]["src"];
                     this.stance = "jump";
                     this.currentFrame = 0;
                     this.totalFrames = 4;
-                    console.log(`Here ${Math.random()}`);
                     this.mod = this.sprites["jump"]["mod"];
+                    console.log(`Jumping!`);
                 }
                 break;
             default:

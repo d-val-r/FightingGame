@@ -124,9 +124,9 @@ const player1 = new Player(
             mod: 7
         },
         "jump": {
-            // jumping does not make use of a stance; instead, the Player has an internal jumping boolean 
+            stance: "jump",
             src: "./assets/characters/cyborg/Cyborg_jump.png",
-            mod: 15
+            mod: 23
         }
     },
     "wasd"
@@ -196,7 +196,7 @@ const player2 = new Player(
         "jump": {
             stance: "jump",
             src: "./assets/characters/biker/Biker_jump.png",
-            mod: 15
+            mod: 23
         }
     },
     "arrows"
@@ -287,15 +287,15 @@ const animate = () => {
     } 
 
 
-    // if (player1.velocity.y === 0) {
-    //     // player1.switchSprite("jump");
-    //     player1.jumping = false;
-    // }
+    if (player1.velocity.y === 0) {
+        // player1.switchSprite("jump");
+        player1.jumping = false;
+    }
 
-    // if (player2.velocity.y === 0) {
-    //     // player2.switchSprite("jump");
-    //     player2.jumping = false;
-    // }
+    if (player2.velocity.y === 0) {
+        // player2.switchSprite("jump");
+        player2.jumping = false;
+    }
 
 
     // attacking controls for player 1
@@ -366,6 +366,8 @@ window.addEventListener('keydown', (event) => {
         case 'ArrowUp':
             keys.upArrow.pressed = true;
             player2.falling = true;
+            player2.jumping = true;
+            player2.switchSprite("jump");
             break;
         case 'f':
             player1.attack();
