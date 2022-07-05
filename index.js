@@ -319,7 +319,7 @@ const animate = () => {
         && player1.isAttacking) {
             console.log("Player1 attacks!");
             player1.isAttacking = false;
-            player2.health -= 10;
+            player2.health -= 5;
             document.querySelector("#health2").style.width = `${player2.health}%`;
         } 
 
@@ -331,7 +331,7 @@ const animate = () => {
         && player2.isAttacking) {
             console.log("Player2 attacks!");
             player2.isAttacking = false;
-            player1.health -= 10;
+            player1.health -= 5;
             document.querySelector("#health1").style.width = `${player1.health}%`;
     }
 
