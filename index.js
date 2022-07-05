@@ -118,8 +118,12 @@ const player1 = new Player(
             src: "./assets/characters/cyborg/Cyborg_attack1.png",
             mod: 7
         },
-        "jump": {
+        "jump_right": {
             src: "./assets/characters/cyborg/Cyborg_jump.png",
+            mod: 23
+        },
+        "jump_left": {
+            src: "./assets/characters/cyborg/Cyborg_jump_inverted.png",
             mod: 23
         }
     },
@@ -183,7 +187,11 @@ const player2 = new Player(
             src: "./assets/characters/biker/Biker_run_inverted.png",
             mod: 7
         },
-        "jump": {
+        "jump_left": {
+            src: "./assets/characters/biker/Biker_jump_inverted.png",
+            mod: 23
+        },
+        "jump_right": {
             src: "./assets/characters/biker/Biker_jump.png",
             mod: 23
         }
@@ -199,7 +207,7 @@ player2.draw();
 // create an infinite animation loop that relies on the velocities 
 // of the sprites to animate them; keypresses alter the velocity
 const animate = () => {
-    
+
     window.requestAnimationFrame(animate);
     ctx.clearRect(0,0, canvas.width, canvas.height);
     // ctx.fillStyle = 'black';
@@ -339,7 +347,7 @@ window.addEventListener('keydown', (event) => {
             // keep clicking 'w' (or up arrow) to "double jump"
             player1.falling = true;
             player1.jumping = true;
-            player1.switchSprite("jump")
+            player1.switchSprite(`jump_${player1.direction}`);
             break;
         case 'ArrowRight':
             keys.rightArrow.pressed = true;
@@ -356,7 +364,7 @@ window.addEventListener('keydown', (event) => {
             keys.upArrow.pressed = true;
             player2.falling = true;
             player2.jumping = true;
-            player2.switchSprite("jump");
+            player2.switchSprite(`jump_${player2.direction}`);
             break;
         case 'f':
             player1.attack();

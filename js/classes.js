@@ -173,7 +173,7 @@ class Player extends Sprite {
 
         // if the player is mid-jump, ensure the sprite is set to jump so that
         // the sprite does not change as the player is in the air
-        sprite = this.jumping ? "jump" : sprite;
+        sprite = this.jumping ? `jump_${this.direction}` : sprite;
 
         switch (sprite) {
             case "idle_left":
@@ -212,14 +212,25 @@ class Player extends Sprite {
                 }
                 this.mod = this.sprites["run_right"]["mod"];
                 break;
-            case "jump":
-                if (this.jumping && this.stance != "jump") {
+            case "jump_right":
+                if (this.jumping && this.stance !== "jump_right") {
                     // this.jumping = false;
-                    this.image.src = this.sprites["jump"]["src"];
-                    this.stance = "jump";
+                    this.image.src = this.sprites["jump_right"]["src"];
+                    this.stance = "jump_right";
                     this.currentFrame = 0;
                     this.totalFrames = 4;
-                    this.mod = this.sprites["jump"]["mod"];
+                    this.mod = this.sprites["jump_right"]["mod"];
+                    console.log(`Jumping!`);
+                }
+                break;
+            case "jump_left":
+                if (this.jumping && this.stance !== "jump_left") {
+                    // this.jumping = false;
+                    this.image.src = this.sprites["jump_left"]["src"];
+                    this.stance = "jump_left";
+                    this.currentFrame = 0;
+                    this.totalFrames = 4;
+                    this.mod = this.sprites["jump_left"]["mod"];
                     console.log(`Jumping!`);
                 }
                 break;
