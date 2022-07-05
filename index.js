@@ -99,32 +99,26 @@ const player1 = new Player(
     0,
     {
         "idle_right": {
-            stance: "idle_right",
             src: "./assets/characters/cyborg/Cyborg_idle.png",
             mod: 17
         },
         "idle_left": {
-            stance: "idle_left",
             src: "./assets/characters/cyborg/Cyborg_idle_inverted.png",
             mod: 17
         },
         "run_right": {
-            stance: "run_right",
             src: "./assets/characters/cyborg/Cyborg_run.png",
             mod: 7
         },
         "run_left": {
-            stance: "run_left",
             src: "./assets/characters/cyborg/Cyborg_run_inverted.png",
             mod: 7
         },
         "attack_right": {
-            stance: "attack_right",
             src: "./assets/characters/cyborg/Cyborg_attack1.png",
             mod: 7
         },
         "jump": {
-            stance: "jump",
             src: "./assets/characters/cyborg/Cyborg_jump.png",
             mod: 23
         }
@@ -174,27 +168,22 @@ const player2 = new Player(
             
             // stance is used for comparison purposes, as the filename 
             // recieves an added prefix after becoming the image source
-            stance: "idle_left",
             src: "./assets/characters/biker/Biker_idle_inverted.png",
             mod: 17
         },
         "idle_right": {
-            stance: "idle_right",
             src: "./assets/characters/biker/Biker_idle.png",
             mod: 17
         },
         "run_right": {
-            stance: "run_right",
             src: "./assets/characters/biker/Biker_run.png",
             mod: 7
         },
         "run_left": {
-            stance: "run_left",
             src: "./assets/characters/biker/Biker_run_inverted.png",
-            mod: 13 
+            mod: 7
         },
         "jump": {
-            stance: "jump",
             src: "./assets/characters/biker/Biker_jump.png",
             mod: 23
         }
@@ -439,23 +428,6 @@ const decreaseTime = () => {
     }
 }
 
-const gameLoop = () => {
-    let loop = true;
-
-    while (loop) {
-        if (player1.health <= 0 || player2.health <= 0) {
-            loop = false;
-            if (player1.health > player2.health) {
-                winnerMessage.textContent = "Player 1 Wins!";
-            } else if (player2.health > player1.health) {
-                winnerMessage.textContent = "Player 2 Wins!"
-            } else {
-                winnerMessage.textContent = "Tie Game!";
-            }
-        }
-    }
-}
 
 animate();
 decreaseTime();
-// gameLoop();
