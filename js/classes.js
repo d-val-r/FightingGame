@@ -15,19 +15,30 @@ class Sprite {
         this.framesElapsed = 0;
         this.currentFrame = currentFrame;
 
+        // used primarily in instances where an image needs to be read left-to-right (as in the case of mirrored PNGs)
+        this.renderProperties = {
+            sx: (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames),
+            sy: 0,
+            sWidth: this.image.width / this.totalFrames,
+            sHeight: this.image.height,
+            dWidth: this.image.width / this.totalFrames * this.scale, 
+            dHeight: this.image.height * this.scale
+        }
+
     }
 
     draw() {
         ctx.drawImage(
             this.image, 
-            (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames),
-            0,
-            this.image.width / this.totalFrames,
-            this.image.height,
-            this.position.x, 
-            this.position.y, 
-            this.image.width / this.totalFrames * this.scale, 
-            this.image.height * this.scale);
+            this.renderProperties.sx,
+            this.renderProperties.sy,
+            this.renderProperties.sWidth,
+            this.renderProperties.sHeight,
+            this.position.x,
+            this.position.y,
+            this.renderProperties.dWidth,
+            this.renderProperties.dHeight
+        );
     }
 
 
@@ -40,6 +51,14 @@ class Sprite {
         if (this.framesElapsed % mod === 0) {
             this.currentFrame = (this.currentFrame === -1 ? -1 : (this.currentFrame  + 1) % this.totalFrames);
         }
+
+        // update the render properties
+        this.renderProperties.sx = (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames);
+        this.renderProperties.sy = 0;
+        this.renderProperties.sWidth = this.image.width / this.totalFrames;
+        this.renderProperties.sHeight = this.image.height;
+        this.renderProperties.dWidth = this.image.width / this.totalFrames * this.scale;
+        this.renderProperties.dHeight = this.image.height * this.scale;
 
         this.draw();
 
@@ -109,9 +128,10 @@ class Player extends Sprite {
             if (this.isAttacking) {
                 ctx.fillStyle = 'black';
                 ctx.fillRect(this.attackBox.position.x, this.attackBox.position.y, this.attackBox.width, this.attackBox.height);
-        }
+            }
         } 
-        super.draw();
+       
+       super.draw(); 
         
     }
 
