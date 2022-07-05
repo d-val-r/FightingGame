@@ -196,6 +196,8 @@ class Player extends Sprite {
         // the sprite does not change as the player is in the air
         sprite = this.jumping ? `jump_${this.direction}` : sprite;
 
+        this.iterator = this.jumping ? -1 : 1;
+
         switch (sprite) {
             case "idle_left":
                 if (this.stance !== "idle_left") {
@@ -249,8 +251,8 @@ class Player extends Sprite {
                     // this.jumping = false;
                     this.image.src = this.sprites["jump_left"]["src"];
                     this.stance = "jump_left";
-                    this.currentFrame = 0;
                     this.totalFrames = 4;
+                    this.currentFrame = this.totalFrames - 1;
                     this.renderProperties.sx = this.image.width;
                     this.renderProperties.sy = 0;
                     this.mod = this.sprites["jump_left"]["mod"];

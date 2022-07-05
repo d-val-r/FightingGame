@@ -124,7 +124,7 @@ const player1 = new Player(
         },
         "jump_left": {
             src: "./assets/characters/cyborg/Cyborg_jump_inverted.png",
-            mod: 23
+            mod: 37
         }
     },
     "wasd"
@@ -189,7 +189,7 @@ const player2 = new Player(
         },
         "jump_left": {
             src: "./assets/characters/biker/Biker_jump_inverted.png",
-            mod: 23
+            mod: 27
         },
         "jump_right": {
             src: "./assets/characters/biker/Biker_jump.png",
