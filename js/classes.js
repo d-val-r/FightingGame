@@ -4,7 +4,7 @@ const GRAVITY = 0.4;
 
 // represents any rendered sprite
 class Sprite {
-    constructor(width, height, position, imgSrc, scale = 1, totalFrames = 1, currentFrame = -1) {
+    constructor(width, height, position, imgSrc, scale = 1, totalFrames = 1, currentFrame = -999) {
         this.position = position;
         this.height = height;
         this.width = width;
@@ -14,10 +14,11 @@ class Sprite {
         this.totalFrames = totalFrames;
         this.framesElapsed = 0;
         this.currentFrame = currentFrame;
+        this.incrementor = 1;
 
         // used primarily in instances where an image needs to be read left-to-right (as in the case of mirrored PNGs)
         this.renderProperties = {
-            sx: (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames),
+            sx: (this.currentFrame === -999 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames),
             sy: 0,
             sWidth: this.image.width / this.totalFrames,
             sHeight: this.image.height,
@@ -49,11 +50,11 @@ class Sprite {
     update(mod = 17) {
         this.framesElapsed++;
         if (this.framesElapsed % mod === 0) {
-            this.currentFrame = (this.currentFrame === -1 ? -1 : (this.currentFrame  + 1) % this.totalFrames);
+            this.currentFrame = (this.currentFrame === -999 ? -999 : this.currentFrame === -1 ? this.totalFrames : (this.currentFrame + this.incrementor) % this.totalFrames);
         }
 
         // update the render properties
-        this.renderProperties.sx = (this.currentFrame === -1 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames);
+        this.renderProperties.sx = (this.currentFrame === -999 ? 0 : this.currentFrame) * (this.image.width / this.totalFrames);
         this.renderProperties.sy = 0;
         this.renderProperties.sWidth = this.image.width / this.totalFrames;
         this.renderProperties.sHeight = this.image.height;
@@ -250,6 +251,8 @@ class Player extends Sprite {
                     this.stance = "jump_left";
                     this.currentFrame = 0;
                     this.totalFrames = 4;
+                    this.renderProperties.sx = this.image.width;
+                    this.renderProperties.sy = 0;
                     this.mod = this.sprites["jump_left"]["mod"];
                     console.log(`Jumping!`);
                 }
